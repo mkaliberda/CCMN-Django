@@ -8,7 +8,7 @@ function createWindow() {
   win = new BrowserWindow({width: 1000, height: 600});
 
   // Specify entry point
-  win.loadURL('http://localhost:3000');
+  win.loadURL('http://unit.ua');
 
   // Show dev tools
   // Remove this line before distributing

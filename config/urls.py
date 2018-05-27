@@ -22,6 +22,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
+
 from rest_framework import views, serializers, status
 from rest_framework.response import Response
 
