@@ -1,0 +1,12 @@
+*log
+*.pot 
+*.pyc 
+*.xml 
+*node* 
+node_modules*
+env*
+*.sqlite3 
+__pycache__/* 
+.idea/ 
+*.DS_Store*
+
