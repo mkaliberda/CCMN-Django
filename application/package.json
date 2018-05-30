@@ -1,11 +1,9 @@
 {
   "name": "ccmn",
   "version": "1.0.0",
-  "description":
-    "React Redux Boilerplate is a workflow boilerplate that make life easier for developers by providing a virtual development environment and production ready build process framework out of the box.",
+  "description": "React Redux Boilerplate is a workflow boilerplate that make life easier for developers by providing a virtual development environment and production ready build process framework out of the box.",
   "scripts": {
-    "dev":
-      "cross-env NODE_ENV=development DASHBOARD_PORT=9901 webpack-dashboard -p 9901 -c red -t dashboard -- node bin/commands.js dev",
+    "dev": "cross-env NODE_ENV=development DASHBOARD_PORT=9901 webpack-dashboard -p 9901 -c red -t dashboard -- node bin/commands.js dev",
     "build": "cross-env NODE_ENV=production node bin/commands.js build",
     "build:release": "cross-env NODE_ENV=release node bin/commands.js build",
     "clean": "rimraf docroot",
@@ -102,17 +100,25 @@
   },
   "jest": {
     "verbose": true,
-    "testPathIgnorePatterns": ["<rootDir>/__tests__/setup/", "<rootDir>/node_modules/"],
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/",
+      "<rootDir>/node_modules/"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup/jestTestSetup.js",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css)$": "identity-obj-proxy"
     },
-    "setupFiles": ["raf/polyfill"],
+    "setupFiles": [
+      "raf/polyfill"
+    ],
     "automock": false,
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx|json)$",
-    "moduleFileExtensions": ["js", "json", "jsx"]
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ]
   },
   "husky": {
     "hooks": {
