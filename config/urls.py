@@ -18,8 +18,11 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.views import generic
 
+from django.conf.urls import url, include
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^users/', include('accounts.urls')),
+    url(r'^', include('accounts.urls')),
 ]
