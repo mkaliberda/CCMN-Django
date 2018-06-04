@@ -117,12 +117,20 @@ USE_L10N = True
 USE_TZ = True
 
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'maxkaliberda1'
+EMAIL_HOST_PASSWORD = 'FW-wYYZS234200'
+DEFAULT_FROM_EMAIL = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 # Rest framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
-'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # )
 }
 
 # Static files (CSS, JavaScript, Images)
@@ -138,5 +146,3 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
-
-
