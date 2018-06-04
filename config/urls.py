@@ -21,8 +21,10 @@ from django.views import generic
 from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include('accounts.urls')),
+    url(r'^', TemplateView.as_view(template_name="index.html", content_type="html"), name="home"),
 ]

@@ -4,10 +4,11 @@ from knox.models import AuthToken
 from .models import Profile
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer
 
-
-class RegistrationAPI(generics.GenericAPIView):
+class RegistrationAPI(generics.ListCreateAPIView):
     serializer_class = CreateUserSerializer
-
+    def get_queryset(self):
+        return
+        
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
