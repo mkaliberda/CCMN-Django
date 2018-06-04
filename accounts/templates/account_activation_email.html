@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% autoescape off %}
+<body style="background-color: #efefef; padding: 25px;">
+	<table>
+		<tr style="width: 100%; height: 70px; padding-top: 20px; display: inline-block; background-color: #002842;">
+			<td><img src="http://bitreport.io/static/main/img/logo.png" style="width: 100px;"></td>
+		</tr>
+		<tr style="font-weight: 600px; padding-bottom: 50px;">
+			<td>Добро пожаловать на сайт <a style="color: #337ab7;">ccmn.io</a></td>
+		</tr>
+		<tr><td>Пожалуйста, сохраните это сообщение. Параметры вашей учетной записи таковы:</td></tr>
+		<tr style="font-weight: 600px; padding-bottom: 50px;">
+			<td>Имя пользователя: {{ user.username }}</td>
+		</tr>
+		<tr style="font-weight: 600px; padding-bottom: 25px;">
+			<td>Для активации учетной записи перейдите по ссылке</td>
+		</tr>
+		<tr style="color: #337ab7;">
+			<td><a href="{{ domain }}{% url 'activate' uidb64=uid token=token %}">{{ domain }}{% url 'activate' uidb64=uid token=token %}</a></td>
+		</tr>
+	</table>
+</body>
+{% endautoescape %}
