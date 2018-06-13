@@ -141,7 +141,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/static-only")
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 MEDIA_URL = '/media/'
@@ -152,7 +152,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
 WEBPACK_LOADER = {
     'DEFAULT': {
             'BUNDLE_DIR_NAME': 'bundles/',
-            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
         }
 }
 
