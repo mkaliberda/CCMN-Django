@@ -1,6 +1,7 @@
 from rest_framework import serializers
 import os
 from django.contrib.auth.models import User
+from .models import Profile
 from django.contrib.auth import authenticate
 
 # For email approve
@@ -11,9 +12,6 @@ from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_text
 # For email approve
 
-from config.settings import BASE_DIR
-
-
 
 def _send_email(to_list, subject, message, sender='maxkaliberda1@gmail.com'):
     list = [to_list]
@@ -22,22 +20,29 @@ def _send_email(to_list, subject, message, sender='maxkaliberda1@gmail.com'):
     return msg.send()
 
 
+class ProfileUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('id', 'text')
+
 class CreateUserSerializer(serializers.ModelSerializer):
+    profile = ProfileUserSerializer(required=True)
     class Meta:
         model = User
-        fields = ('id', 'username', 'password')
+        fields = ('id', 'first_name', 'last_name', 'username', 'password', 'profile', 'email')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        email_registrarion_active = os.path.join(BASE_DIR, "accounts", "email_template", "account_activation_email.html")
-        user = User.objects.create_user(validated_data['username'],
-                                        None,
-                                        validated_data['password'])
+        user = User.objects.create(username=validated_data['username'],
+                                    first_name=validated_data['first_name'],
+                                    password=validated_data['password'],
+                                    email=validated_data['email'])
         subject = 'Активация аккаунта ccmn.com'
+        profile_data = validated_data.pop('profile')
         message = render_to_string("account_activation_email.html", {
             'user': user,
-            'domain': "ccmn.com",
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'domain': "http://127.0.0.1:8000",
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
             'token': account_activation_token.make_token(user),
         })
         emails = user.email

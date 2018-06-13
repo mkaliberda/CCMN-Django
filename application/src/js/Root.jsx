@@ -9,19 +9,18 @@ export default class Root extends Component {
       <Router>
         {this.props.routes}
       </Router>
-    );
+    )
   }
-
   render() {
     return (
       <Provider store={this.props.store}>
         {this.content}
       </Provider>
-    );
+    )
   }
 }
 
 Root.propTypes = {
   routes: PropTypes.element.isRequired,
   store: PropTypes.object.isRequired,
-};
+}
