@@ -1,8 +1,8 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
+import { render } from 'react-dom'
 import App from './components/App'
 
-ReactDOM.render(
-    <App/>,
+render(
+    <h2>Artist3</h2>,
     document.getElementById('root')
-);
+)
