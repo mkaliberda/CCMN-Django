@@ -1,7 +1,8 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+import App from './components/App'
 
 ReactDOM.render(
-    <h2>Artist</h2>,
+    <App/>,
     document.getElementById('root')
 );
