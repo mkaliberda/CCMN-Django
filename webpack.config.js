@@ -26,7 +26,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery' 
-        })
+        }),
     ],
     
     module: {
@@ -40,6 +40,10 @@ module.exports = {
                 presets: ['react']
               }
             }
+          },
+          {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
           }
         ]
       },
@@ -47,6 +51,6 @@ module.exports = {
     resolve: {
         //tells webpack where to look for modules
         //extensions that should be used to resolve modules
-        extensions: ['.js', '.jsx'] 
+        extensions: ['.js', '.jsx', 'less'] 
     }   
 }

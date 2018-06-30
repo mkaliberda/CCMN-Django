@@ -16,3 +16,4 @@ webpack-stats.json
 
 # Temporary Files
 *.swp
+webpack-stats.json
