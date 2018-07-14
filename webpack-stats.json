@@ -1,1 +1,1 @@
-{"status":"error","chunks":{"main":[{"name":"main-84496684d8a5660accbd.js","path":"/Users/dspyrydo/Documents/42/Projects/CCMN/static/bundles/main-84496684d8a5660accbd.js"}]},"error":"ModuleNotFoundError","message":"Module not found: Error: Can't resolve '../store/configureStore' in '/Users/dspyrydo/Documents/42/Projects/CCMN/frontend/js'"}
+{"status":"done","chunks":{"main":[{"name":"main-37a5c0037c23a97a132a.js","path":"/Users/dspyrydo/Documents/42/Projects/CCMN/static/bundles/main-37a5c0037c23a97a132a.js"}]}}
