@@ -1,12 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import 'antd/dist/antd.css'
 import { Card, Input, Button } from 'antd'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 const styles = {
 
 }
 
 class Login extends React.Component {
+
+    goToSignupPage = () => {
+        this.props.push({ pathname: '/sign-up' })
+    }
+
     render() {
         return (
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '15%'}}>
@@ -23,7 +31,7 @@ class Login extends React.Component {
                 <Input style={{ width: '50%' }} placeholder='password'/>
                 <Button style={{ marginTop: 10, marginBottom: 10 }} type="primary">Login</Button> 
                 Or
-                <Button style={{ marginTop: 10, marginBottom: 10 }} type="secondary">Get Your Access</Button>
+                <Button onClick={this.goToSignupPage} style={{ marginTop: 10, marginBottom: 10 }} type="secondary">Get Your Access</Button>
             </div>
             </Card>
           </div>
@@ -31,4 +39,8 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+const mapDispatchToProps = dispatch => ({
+    push: path => dispatch(push(path)),
+})
+
+export default connect(null, mapDispatchToProps)(Login)
