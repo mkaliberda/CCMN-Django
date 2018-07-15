@@ -2,7 +2,7 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import input from 'antd/lib/input';
 import { Card, Input, Button, Form, Icon } from 'antd'
-import apiClient from './api/client'
+import axios from 'axios'
 
 const styles = ({
     divWrapper: {
@@ -42,12 +42,15 @@ class SignUp extends React.Component {
     }
 
     handleSignUp = () => {
-        apiClient.post('/auth/register/', {
+        axios.post('/auth/register/', {
             first_name: this.firstName,
             last_name: this.lastName,
             username: this.username,
             password: this.password,
-            email: this.email
+            email: this.email,
+            profile: {
+                text: this.website,
+            },
         }).then(res => {
             console.log(res)
         })
@@ -73,6 +76,10 @@ class SignUp extends React.Component {
         this.username = e.target.value
     }
 
+    onPasswordChange = e => {
+        this.password = e.target.value
+    }
+
     render() {
         return (
             <div style={styles.divWrapper}>
@@ -81,8 +88,9 @@ class SignUp extends React.Component {
                     <p>Get your access</p>
                     <Input style={styles.input} onChange={this.onNameChange} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
                     <Input style={styles.input} onChange={this.onLastNameChange} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
-                    <Input style={styles.input} onChange={this.onLastNameChange} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                    <Input style={styles.input} onChange={this.onWebsiteChange} prefix={<Icon type="global" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Company Website URL" />
+                    <Input style={styles.input} onChange={this.onUsernameChange} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                    <Input style={styles.input} onChange={this.onPasswordChange} type="password" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Password" />
+                    <Input style={styles.input} onChange={this.onWebsiteChange} prefix={<Icon style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Company Website URL" />
                     <Input style={styles.input} onChange={this.onEmailChange} prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
                     <Button style={styles.buttons} onClick={this.handleSignUp} type="primary">Get My Access Link</Button>
                     </Form>

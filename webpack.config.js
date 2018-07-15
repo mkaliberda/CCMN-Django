@@ -17,6 +17,7 @@ module.exports = {
         //naming convention webpack should use for your files
         filename: '[name]-[hash].js', 
     },
+    // to ensure that the sourcefile are shown in the browser
     devtool: 'eval-source-map',
     plugins: [
         //tells webpack where to store data about your bundles.
