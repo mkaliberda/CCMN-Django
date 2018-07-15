@@ -58,7 +58,7 @@ class Login extends React.Component {
                     <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
                     <Button style={styles.buttons} type="primary">Login</Button>
                         Or
-                    <Button onClick={this.goToSignupPage} style={styles.buttons} type="secondary">Get Your Access</Button>
+                    <Button onClick={this.goToSignupPage} style={styles.buttons} type="primary">Get Your Access</Button>
                 </Form>
             </Card>
           </div>

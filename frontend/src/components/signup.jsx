@@ -17,14 +17,17 @@ const styles = ({
         alignItems: 'center',
     },
     input: {
-        width: '50%',
-        marginBottom: 0,
+        marginBottom: 10,
     },
     card: {
         width: 600,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    buttons: {
+        marginTop: 10,
+        marginBottom: 10
     },
 })
 class SignUp extends React.Component {
@@ -33,14 +36,14 @@ class SignUp extends React.Component {
         return (
             <div style={styles.divWrapper}>
                 <Card title="CCMN" style={styles.card}>
-                    <p>Get your access</p>
                     <Form style={styles.form}>
+                    <p>Get your access</p>
                     <Input style={styles.input} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="First Name" />
                     <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Last Name" />
                     <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Company Website URL" />
                     <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-                    </Form>
                     <Button style={styles.buttons} type="primary">Get My Access Link</Button>
+                    </Form>
                 </Card>
             </div>
         )
