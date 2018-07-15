@@ -2,7 +2,8 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import input from 'antd/lib/input';
 import { Card, Input, Button, Form, Icon } from 'antd'
-import axios from 'axios'
+import { signup } from '../reducers/auth'
+import { connect } from 'react-redux'
 
 const styles = ({
     divWrapper: {
@@ -42,15 +43,13 @@ class SignUp extends React.Component {
     }
 
     handleSignUp = () => {
-        axios.post('/auth/register/', {
-            first_name: this.firstName,
-            last_name: this.lastName,
+        this.props.signup({
+            firstName: this.firstName,
+            lastName: this.lastName,
             username: this.username,
             password: this.password,
             email: this.email,
-            profile: {
-                text: this.website,
-            },
+            website: this.website,
         }).then(res => {
             console.log(res)
         })
@@ -100,4 +99,8 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp
+const mapDispatchToProps = dispatch => ({
+    signup: params => dispatch(signup(params)),
+})
+
+export default connect(null, mapDispatchToProps)(SignUp)
