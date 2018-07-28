@@ -1,6 +1,7 @@
 import { createReducer, createAction } from 'redux-act'
 import axios from 'axios'
 
+const _getEmailAddressLocalStorageKey = 'CCMN_last_email_address'
 export const setLoadedUser = createAction('save user info')
 export const setLoggedIn = createAction('set if user is logged in')
 export const setEmailAddress = createAction('set current user email address')
@@ -28,7 +29,7 @@ export const signup = params => dispatch => {
         if (res.data.success !== true && res.data.message) {
             throw new Error(res)
           }
-        const user = dispatch(handleSuccessfulLogin(res.data))
+        const user = dispatch(handleSuccessfulLogin(res.data, params.email))
         if (!user){
             console.error('Got invalid signup response', res.data)
             throw new Error(res)
@@ -38,7 +39,7 @@ export const signup = params => dispatch => {
 }
 
 export const handleSuccessfulLogin =
-userRes =>
+(userRes, email) =>
   dispatch => {
     console.log(userRes)
     if (!userRes.user || !userRes.token) {
@@ -49,8 +50,10 @@ userRes =>
     const {
       user, token
     } = userRes
-
-    dispatch(setEmailAddress(user.email)) // save it
+    console.log(token)
+    console.log(user)
+    console.log(email)
+    dispatch(setEmailAddress(email)) // save it
     dispatch(saveToken(token)) // save it
     dispatch(loadedUser(user))
     return user
@@ -69,6 +72,30 @@ function loadedUser(user) {
     }
   }
 
+  export function _getAuthStorageKey(emailAddress) {
+    // get key for local storage containing tokens for current account
+    const slug = _slugify(emailAddress)
+    if (!slug)
+      return 'UNKNOWN'
+    return `CCMN_${slug}_${process.env.ENV_NAME}`
+  }
+  
+  function _getEmailAddress() {
+    const emailAddress = window.localStorage.getItem(_getEmailAddressLocalStorageKey())
+    return emailAddress
+  }
+  
+  function _slugify(string) {
+    if (string === undefined)
+      return undefined
+    // remove special characters from string
+    // https://gist.github.com/mathewbyrne/1280286
+    return string.toLowerCase()
+      .replace(/[^\w\s-]/g, '') // remove non-word [a-z0-9_], non-whitespace, non-hyphen characters
+      .replace(/[\s_-]+/g, '-') // swap any length of whitespace, underscore, hyphen characters with a single -
+      .replace(/^-+|-+$/g, '') // remove leading, trailing -
+  }
+
 /**
    * @event setEmailAddress - save last-used email address to localstorage
    * @property {string} emailAddress
@@ -78,7 +105,7 @@ export default createReducer({
         if (!emailAddress)
           console.warn('saving empty email address')
         // save it
-        window.localStorage.setItem(_getEmailAddressLocalStorageKey(), emailAddress)
+        window.localStorage.setItem(_getEmailAddressLocalStorageKey, emailAddress)
         return { ...state, emailAddress }
       },
 
@@ -118,4 +145,4 @@ export default createReducer({
    * @property {boolean} isLoggedIn
    */
   [setLoggedIn]: (state, isLoggedIn) => ({ ...state, isLoggedIn, isAuthenticating: false }),
-})
+}, authInitialState)
