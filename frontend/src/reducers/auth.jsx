@@ -15,7 +15,6 @@ export const authInitialState = {
 }
 
 export const signup = params => dispatch => {
-    console.log(params)
     return axios.post('/auth/register/', {
         first_name: params.firstName,
         last_name: params.lastName,
@@ -41,7 +40,6 @@ export const signup = params => dispatch => {
 export const handleSuccessfulLogin =
 (userRes, email) =>
   dispatch => {
-    console.log(userRes)
     if (!userRes.user || !userRes.token) {
       console.error('got invalid user response passed to handleSuccessfulLogin', userRes)
       return
@@ -50,9 +48,6 @@ export const handleSuccessfulLogin =
     const {
       user, token
     } = userRes
-    console.log(token)
-    console.log(user)
-    console.log(email)
     dispatch(setEmailAddress(email)) // save it
     dispatch(saveToken(token)) // save it
     dispatch(loadedUser(user))

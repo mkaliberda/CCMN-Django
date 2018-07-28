@@ -4,6 +4,7 @@ import Home from '../home'
 import Login from '../../components/login'
 import About from '../about'
 import SignUp from '../../components/signup'
+import Dashboard from '../../components/dashboard'
 
 const App = () => (
   <div>
@@ -15,6 +16,7 @@ const App = () => (
       <Route exact path="/" component={Login} />
       <Route exact path="/about-us" component={About} />
       <Route exact path="/sign-up" component={SignUp} />
+      <Route exact path="/dashboard" component={Dashboard} />
     </main>
   </div>
 )

@@ -4,6 +4,7 @@ import input from 'antd/lib/input';
 import { Card, Input, Button, Form, Icon } from 'antd'
 import { signup } from '../reducers/auth'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 const styles = ({
     divWrapper: {
@@ -51,7 +52,7 @@ class SignUp extends React.Component {
             email: this.email,
             website: this.website,
         }).then(res => {
-            console.log(res)
+            this.props.push({pathname: '/dashboard'})
         })
     }
 
@@ -101,6 +102,7 @@ class SignUp extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
     signup: params => dispatch(signup(params)),
+    push: path => dispatch(push(path)),
 })
 
 export default connect(null, mapDispatchToProps)(SignUp)
