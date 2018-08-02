@@ -6,9 +6,6 @@ export const setLoadedUser = createAction('save user info')
 export const setLoggedIn = createAction('set if user is logged in')
 export const setEmailAddress = createAction('set current user email address')
 export const saveToken = createAction('store access and refresh token')
-export const loadToken = createAction('load token from localStorage')
-export const clearToken = createAction('remove all authentication information')
-export const setIsAuthenticating = createAction('set if we are in the process of authenticating to the server')
 
 export const authInitialState = {
     isLoggedIn: false,
@@ -99,32 +96,13 @@ function loadedUser(user) {
    * @property {string} emailAddress
  */
 export default createReducer({
-    /**
-     * @event loadToken - load token info from localStorage
-     */
-  [loadToken]: state => {
-    const emailAddress = _getEmailAddress()
-    if (!emailAddress)
-      return state
-    const token = JSON.parse(window.localStorage.getItem(_getAuthStorageKey(emailAddress)))
-    if (!token)
-      return state
-    return { ...state, token, emailAddress }
-  },
-
-  [setEmailAddress]: (state, emailAddress) => {
-      if (!emailAddress)
-        console.warn('saving empty email address')
-      // save it
-      window.localStorage.setItem(_getEmailAddressLocalStorageKey, emailAddress)
-      return { ...state, emailAddress }
-    },
-
-    /**
-     * @event setLoggedIn - change logged-in state
-     * @property {boolean} isLoggedIn
-     */
-    [setLoggedIn]: (state, isLoggedIn) => ({ ...state, isLoggedIn, isAuthenticating: false }),
+    [setEmailAddress]: (state, emailAddress) => {
+        if (!emailAddress)
+          console.warn('saving empty email address')
+        // save it
+        window.localStorage.setItem(_getEmailAddressLocalStorageKey, emailAddress)
+        return { ...state, emailAddress }
+      },
 
    /**
    * @event setLoadedUser - got user info from server
@@ -155,32 +133,6 @@ export default createReducer({
     // this.mb.postMessage(MB_AUTH_TOKEN_UPDATED)
 
     return { ...state, token }
-  },
-
-  /**
-   * @event setIsAuthenticating
-   * @property {bool} isAuthenticating
-   */
-  [setIsAuthenticating]: (state, isAuthenticating) => ({ ...state, isAuthenticating }),
-
-
-   /**
-   * @event clearToken - wipe tokens, and all data in store
-   */
-  [clearToken]: (state) => {
-    if (!state.emailAddress) {
-      console.error('attempting to clear token without email address - rejected')
-      return state
-    }
-    window.localStorage.setItem(_getAuthStorageKey(state.emailAddress), null)
-    return {
-      ...state,
-      access_token: null,
-      access_token_expiration: null,
-      refresh_token: null,
-      me: {},
-      isLoggedIn: false,
-    }
   },
 
    /**
