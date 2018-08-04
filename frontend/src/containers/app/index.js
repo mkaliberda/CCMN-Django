@@ -5,8 +5,11 @@ import Login from '../../components/login'
 import About from '../about'
 import SignUp from '../../components/signup'
 import Dashboard from '../../components/dashboard'
+import { persistor } from '../../store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const App = () => (
+  <PersistGate loading={null} persistor={persistor} >
   <div>
     <header>
       <Link to="/">Home</Link>
@@ -19,6 +22,7 @@ const App = () => (
       <Route exact path="/dashboard" component={Dashboard} />
     </main>
   </div>
+  </PersistGate>
 )
 
 export default App
