@@ -62,6 +62,7 @@ export const handleSuccessfulLogin =
    */
 
    export const logout = () => {
+     console.log('logout')
      return dispatch => {
        dispatch(setLoggedIn(false))
        dispatch(clearToken())

@@ -10,16 +10,16 @@ import { PersistGate } from 'redux-persist/integration/react'
 import AuthenticatedRoute from '../../components/authenticatedRoute'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'
-import { connect } from 'react-redux'
 import { logout } from '../../reducers/auth'
+import Logout from './logout'
 
-const App = ({ logout }) => (
+const App = () => (
   <PersistGate loading={null} persistor={persistor} >
   <div>
     <header>
       <Link to="/">Home</Link>
       <Link to="/about-us">About</Link>
-      <Button onClick={logout()}>Logout</Button>
+      <Logout />
     </header>
     <main>
       <Route exact path="/" component={Login} />
@@ -31,8 +31,4 @@ const App = ({ logout }) => (
   </PersistGate>
 )
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
-})
-
-export default connect(null, mapDispatchToProps)(App)
+export default App
