@@ -1,8 +1,10 @@
 extends:
   - airbnb
   - plugin:jest/recommended
+  - plugin:prettier/recommended
 parser: "babel-eslint"
 rules:
+
   semi:
     - error
     - never
