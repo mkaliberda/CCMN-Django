@@ -1,8 +1,20 @@
 import { combineReducers } from 'redux'
 import counter from './counter'
-import auth from './auth'
+import auth, { authInitialState } from './auth'
 
-export default combineReducers({
-  counter,
-  auth,
+const appReducer = combineReducers({auth})
+
+const initialState = appReducer({
+  auth: authInitialState
 })
+
+const rootReducer = (state, action) => {
+  switch (action.type) {
+    case 'RESET':
+      // clear state and log out
+      return appReducer({ ...state, ...initialState }, action)
+  }
+  return appReducer(state, action)
+}
+
+export default rootReducer

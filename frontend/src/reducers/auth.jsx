@@ -1,11 +1,13 @@
 import { createReducer, createAction } from 'redux-act'
 import axios from 'axios'
+import { resetStore } from './reset'
 
 const _getEmailAddressLocalStorageKey = 'CCMN_last_email_address'
 export const setLoadedUser = createAction('save user info')
 export const setLoggedIn = createAction('set if user is logged in')
 export const setEmailAddress = createAction('set current user email address')
 export const saveToken = createAction('store access and refresh token')
+export const clearToken = createAction('remove all authentication information')
 
 export const authInitialState = {
     isLoggedIn: false,
@@ -53,6 +55,19 @@ export const handleSuccessfulLogin =
     dispatch(loadedUser(user))
     return user
   }
+
+
+  /**
+   * Logout
+   */
+
+   export const logout = () => {
+     return dispatch => {
+       dispatch(setLoggedIn(false))
+       dispatch(clearToken())
+       dispatch(resetStore())
+     }
+   }
 
 /**
  * Private method, call when we've received a user response from the API.
@@ -140,4 +155,24 @@ export default createReducer({
    * @property {boolean} isLoggedIn
    */
   [setLoggedIn]: (state, isLoggedIn) => ({ ...state, isLoggedIn, isAuthenticating: false }),
+
+  /**
+   * @event clearToken - wipe tokens, and all data in store
+   */
+  [clearToken]: (state) => {
+    console.log(state)
+    if (!state.emailAddress) {
+      console.error('attempting to clear token without email address - rejected')
+      return state
+    }
+    window.localStorage.setItem(_getAuthStorageKey(state.emailAddress), null)
+    return {
+      ...state,
+      access_token: null,
+      access_token_expiration: null,
+      refresh_token: null,
+      me: {},
+      isLoggedIn: false,
+    }
+  },
 }, authInitialState)
