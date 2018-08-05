@@ -39,6 +39,10 @@ export const signup = params => dispatch => {
     })
 }
 
+export const performLogin = params => { //TODO: set up
+  return axios.post('/auth/login', params).then(res => console.log(res))
+}
+
 export const handleSuccessfulLogin =
 (userRes, email) =>
   dispatch => {

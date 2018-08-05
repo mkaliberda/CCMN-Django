@@ -5,6 +5,7 @@ import { Card, Input, Button, Form, Icon } from 'antd'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import axios from 'axios'
+import { performLogin } from '../reducers/auth'
 
 const FormItem = Form.Item
 
@@ -88,6 +89,7 @@ class Login extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
     push: path => dispatch(push(path)),
+    performLogin: params => dispatch(performLogin(params))
 })
 
 export default connect(null, mapDispatchToProps)(Login)
