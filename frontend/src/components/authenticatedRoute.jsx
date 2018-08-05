@@ -7,13 +7,15 @@ import ReactRouterPropTypes from 'react-router-prop-types'
 const AuthenticatedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={props => (isLoggedIn ?
-      <Component {...props} /> :
-      <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-    )}
+    render={props =>
+      isLoggedIn ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+      )
+    }
   />
 )
-
 
 function mapStateToProps(state) {
   return {
@@ -21,7 +23,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(AuthenticatedRoute))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(AuthenticatedRoute)
+)
 
 AuthenticatedRoute.propTypes = {
   component: PropTypes.func.isRequired,
