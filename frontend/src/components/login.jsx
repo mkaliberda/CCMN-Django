@@ -4,6 +4,7 @@ import 'antd/dist/antd.css'
 import { Card, Input, Button, Form, Icon } from 'antd'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import axios from 'axios'
 
 const FormItem = Form.Item
 
@@ -37,9 +38,28 @@ const styles = ({
 })
 
 class Login extends React.Component {
+    state = {
+        username: '',
+        password: '',
+    }
 
     goToSignupPage = () => {
         this.props.push({ pathname: '/sign-up' })
+    }
+
+    onUsernameChange = (e) => {
+        this.setState({ username: e.target.value })
+    }
+
+    onPasswordChange = (e) => {
+        this.setState({ password: e.target.value })
+    }
+
+    handleLogin = () => {
+        axios.post('/auth/login/', {
+            username: this.state.username,
+            password: this.state.password
+        }).then(res => console.log(res))
     }
 
     render() {
@@ -54,9 +74,9 @@ class Login extends React.Component {
                 network to enable people and their devices to interact more effectively through real-time contextual 
                 information related to such parameters as locations, availability of users, or mobile device assets.</p>
                 <Form style={styles.form}>
-                    <Input style={styles.input} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />    
-                    <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                    <Button style={styles.buttons} type="primary">Login</Button>
+                    <Input style={styles.input} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} value={this.state.username} onChange={this.onUsernameChange} type="username" placeholder="Username" />    
+                    <Input style={styles.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} value={this.state.password} onChange={this.onPasswordChange} type="password" placeholder="Password" />
+                    <Button style={styles.buttons} onClick={this.handleLogin} type="primary">Login</Button>
                         Or
                     <Button onClick={this.goToSignupPage} style={styles.buttons} type="primary">Get Your Access</Button>
                 </Form>
