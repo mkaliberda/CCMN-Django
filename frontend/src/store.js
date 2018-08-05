@@ -2,9 +2,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createHashHistory'
-import rootReducer from './reducers'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+import rootReducer from './reducers'
 
 export const history = createHistory()
 
@@ -32,8 +32,9 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-export let store = createStore(
+export const store = createStore(
   connectRouter(history)(persistedReducer),
   initialState,
-  composedEnhancers)
-export let persistor = persistStore(store)
+  composedEnhancers
+)
+export const persistor = persistStore(store)
