@@ -16,8 +16,12 @@ const App = () => (
   <PersistGate loading={null} persistor={persistor}>
     <div>
       <header>
-        <Link to="/">Home</Link>
-        <Link to="/about-us">About</Link>
+        <Link to="/">
+          Home
+        </Link>
+        <Link to="/about-us">
+          About
+        </Link>
         <Logout />
       </header>
       <main>

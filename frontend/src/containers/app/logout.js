@@ -1,21 +1,21 @@
 import React from 'react'
 import { Button } from 'antd'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { logout } from '../../reducers/auth'
 import 'antd/dist/antd.css'
 
-const Logout = ({ logout }) => <Button onClick={() => logout()}>Logout</Button>
-
-Logout.propTypes = {
-  logout: PropTypes.func.isRequired,
+class Logout extends React.Component {
+  render () {
+    return (
+      <Button onClick={() => this.props.logout()}>
+        Logout
+      </Button>
+    )
+  }
 }
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logout())
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Logout)
+export default connect(null, mapDispatchToProps)(Logout)

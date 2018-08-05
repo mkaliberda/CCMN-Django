@@ -4,7 +4,7 @@ import auth, { authInitialState } from './auth'
 const appReducer = combineReducers({ auth })
 
 const initialState = appReducer({
-  auth: authInitialState,
+  auth: authInitialState
 })
 
 const rootReducer = (state, action) => {
