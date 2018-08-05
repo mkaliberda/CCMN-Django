@@ -14,6 +14,7 @@ rules:
   react/jsx-uses-react: error
 
   # we don't want these but have them due to legacy conventions
+  react/jsx-one-expression-per-line: off
   jest/valid-expect: off # ditto
   react/jsx-filename-extension: off # maybe good to fix
   no-use-before-define: off # fix
