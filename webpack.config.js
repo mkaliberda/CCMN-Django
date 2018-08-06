@@ -9,7 +9,7 @@ module.exports = {
     //the entry point we created earlier. Note that './' means 
     //your current directory. You don't have to specify the extension  now,
     //because you will specify extensions later in the `resolve` section
-    entry: './frontend/js/index',
+    entry: './frontend/src/index',
     
     output: {
         //where you want your compiled bundle to be stored
@@ -17,7 +17,8 @@ module.exports = {
         //naming convention webpack should use for your files
         filename: '[name]-[hash].js', 
     },
-    
+    // to ensure that the sourcefile are shown in the browser
+    devtool: 'eval-source-map',
     plugins: [
         //tells webpack where to store data about your bundles.
         new BundleTracker({filename: './webpack-stats.json'}), 
@@ -26,13 +27,14 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery' 
-        })
+        }),
+        
     ],
     
     module: {
         rules: [
           {
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             exclude: /(node_modules|bower_components)/,
             use: {
               loader: 'babel-loader',
@@ -40,6 +42,10 @@ module.exports = {
                 presets: ['react']
               }
             }
+          },
+          {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
           }
         ]
       },
@@ -47,6 +53,6 @@ module.exports = {
     resolve: {
         //tells webpack where to look for modules
         //extensions that should be used to resolve modules
-        extensions: ['.js', '.jsx'] 
+        extensions: ['.js', '.jsx', 'less'] 
     }   
 }

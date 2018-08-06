@@ -9,4 +9,10 @@ env*
 __pycache__/* 
 .idea/ 
 *.DS_Store*
+/static/*
 
+# webpack stats
+webpack-stats.json
+
+# Temporary Files
+*.swp
