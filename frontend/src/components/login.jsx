@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import 'antd/dist/antd.css'
-import { Card, Input, Button, Form, Icon } from 'antd'
+import {
+  Card, Input, Button, Form, Icon
+} from 'antd'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import axios from 'axios'
@@ -70,7 +72,7 @@ class Login extends React.Component {
   }
 
   goToDashboard = () => {
-    this.props.push({ pathname: '/dashboard' })
+    this.props.push({ pathname: '/dashboard/map' })
   }
 
   render() {

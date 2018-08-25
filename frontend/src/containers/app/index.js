@@ -1,5 +1,7 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import {
+  Route, Link, Switch, RouteNest
+} from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Button } from 'antd'
 import Login from '../../components/login'
@@ -15,21 +17,14 @@ import Nav from '../../components/nav/index'
 
 const App = () => (
   <PersistGate loading={null} persistor={persistor}>
-    <div>
-      <header>
-        <Link to="/">Home</Link>
-        <Link to="/about-us">About</Link>
-        <Logout />
-      </header>
-      <Nav>
-        <main>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/about-us" component={About} />
-          <Route exact path="/sign-up" component={SignUp} />
-          <Route exact path="/dashboard" component={Dashboard} />
-        </main>
-      </Nav>
-    </div>
+
+    <Route exact path="/" component={Login} />
+    <Route exact path="/about-us" component={About} />
+    <Route exact path="/sign-up" component={SignUp} />
+
+    <Route path="/dashboard" component={Nav}>
+      <Route exact path="/dashboard/map" component={Dashboard} />
+    </Route>
   </PersistGate>
 )
 

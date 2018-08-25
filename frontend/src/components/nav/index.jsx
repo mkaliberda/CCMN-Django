@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import NavToolBar from './navToolBar'
 
 const Nav = ({ children }) => (
-  <div>
-    <NavToolBar children={children} />
-  </div>
+
+  <NavToolBar>
+      {children}
+    </NavToolBar>
+
 )
 
 Nav.propTypes = {
