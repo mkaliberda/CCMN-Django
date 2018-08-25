@@ -69,6 +69,10 @@ class Login extends React.Component {
       .then(res => console.log(res))
   }
 
+  goToDashboard = () => {
+    this.props.push({ pathname: '/dashboard' })
+  }
+
   render() {
     return (
       <div style={styles.divWrapper}>
@@ -109,13 +113,19 @@ class Login extends React.Component {
             >
               Login
             </Button>
-            Or
             <Button
               onClick={this.goToSignupPage}
               style={styles.buttons}
               type="primary"
             >
               Get Your Access
+            </Button>
+            <Button
+              onClick={this.goToDashboard}
+              style={styles.buttons}
+              type="primary"
+            >
+              Login Anonymously
             </Button>
           </Form>
         </Card>

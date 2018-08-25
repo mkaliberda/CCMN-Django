@@ -11,6 +11,7 @@ import AuthenticatedRoute from '../../components/authenticatedRoute'
 import 'antd/dist/antd.css'
 import { logout } from '../../reducers/auth'
 import Logout from './logout'
+import Nav from '../../components/nav/index'
 
 const App = () => (
   <PersistGate loading={null} persistor={persistor}>
@@ -20,12 +21,14 @@ const App = () => (
         <Link to="/about-us">About</Link>
         <Logout />
       </header>
-      <main>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/about-us" component={About} />
-        <Route exact path="/sign-up" component={SignUp} />
-        <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
-      </main>
+      <Nav>
+        <main>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/about-us" component={About} />
+          <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/dashboard" component={Dashboard} />
+        </main>
+      </Nav>
     </div>
   </PersistGate>
 )
