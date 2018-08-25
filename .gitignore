@@ -16,3 +16,5 @@ webpack-stats.json
 
 # Temporary Files
 *.swp
+accounts/serializers.py
+webpack-stats.json
