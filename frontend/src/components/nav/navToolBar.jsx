@@ -6,7 +6,10 @@ import {
 import { connect } from 'react-redux'
 import { dispatch } from 'redux-act'
 import moment from 'moment'
-import { getNumberOfOnlineUsers } from '../../reducers/cisco'
+import {
+  getNumberOfOnlineUsers,
+  getCountOfVisitorsToday
+} from '../../reducers/cisco'
 
 const { Header, Content, Sider } = Layout
 const styles = {
@@ -24,6 +27,8 @@ class NavToolBar extends React.Component {
     children: PropTypes.any,
     getNumberOfOnlineUsers: PropTypes.func.isRequired,
     onlineUsers: PropTypes.number.isRequired,
+    visitorsToday: PropTypes.number.isRequired,
+    // getCountOfVisitorsToday: PropTypes.func.isRequired,
   }
 
   toggle = () => {
@@ -43,6 +48,7 @@ class NavToolBar extends React.Component {
   }
 
   componentDidMount() {
+    // this.props.getCountOfVisitorsToday()
     this.interval = setInterval(this.setDateAndTime, 1000)
     this.devicesConnectedTimeout = setInterval(this.getTotalDevicesConnected, 15000)
   }
@@ -53,7 +59,7 @@ class NavToolBar extends React.Component {
   }
 
   render() {
-    const { children, onlineUsers } = this.props
+    const { children, onlineUsers, visitorsToday } = this.props
     const { dateAndTime } = this.state
 
     return (
@@ -65,7 +71,7 @@ class NavToolBar extends React.Component {
             <div style={styles.headerItem}><b>CCMN</b></div>
             <div style={styles.headerItem}>{dateAndTime}</div>
             <div style={styles.headerItem}>Total Devices Connected: {onlineUsers}</div>
-            <div style={styles.headerItem}>Connected today:</div>
+            <div style={styles.headerItem}>Connected today: {visitorsToday}</div>
             <div style={styles.headerItem}>New connections:</div>
           </div>
 
@@ -103,11 +109,13 @@ class NavToolBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  onlineUsers: state.cisco.onlineUsers
+  onlineUsers: state.cisco.onlineUsers,
+  visitorsToday: state.cisco.visitorsToday
 })
 
 const mapDispatchToProps = dispatch => ({
-  getNumberOfOnlineUsers: () => dispatch(getNumberOfOnlineUsers())
+  getNumberOfOnlineUsers: () => dispatch(getNumberOfOnlineUsers()),
+  getCountOfVisitorsToday: () => dispatch(getCountOfVisitorsToday())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavToolBar)
