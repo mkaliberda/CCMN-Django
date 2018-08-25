@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import 'antd/dist/antd.css'
-import { Card, Input, Button, Form, Icon } from 'antd'
+import {
+  Card, Input, Button, Form, Icon
+} from 'antd'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import axios from 'axios'
@@ -69,6 +71,10 @@ class Login extends React.Component {
       .then(res => console.log(res))
   }
 
+  goToDashboard = () => {
+    this.props.push({ pathname: '/dashboard/map' })
+  }
+
   render() {
     return (
       <div style={styles.divWrapper}>
@@ -109,13 +115,19 @@ class Login extends React.Component {
             >
               Login
             </Button>
-            Or
             <Button
               onClick={this.goToSignupPage}
               style={styles.buttons}
               type="primary"
             >
               Get Your Access
+            </Button>
+            <Button
+              onClick={this.goToDashboard}
+              style={styles.buttons}
+              type="primary"
+            >
+              Login Anonymously
             </Button>
           </Form>
         </Card>

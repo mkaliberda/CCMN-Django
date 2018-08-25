@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import auth, { authInitialState } from './auth'
+import cisco, { ciscoInitialState } from './cisco'
 
-const appReducer = combineReducers({ auth })
+const appReducer = combineReducers({ auth, cisco })
 
 const initialState = appReducer({
   auth: authInitialState,
+  cisco: ciscoInitialState,
 })
 
 const rootReducer = (state, action) => {

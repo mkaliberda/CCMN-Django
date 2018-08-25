@@ -16,33 +16,30 @@ export const authInitialState = {
   token: {},
 }
 
-export const signup = params => dispatch =>
-  axios
-    .post('/auth/register/', {
-      first_name: params.firstName,
-      last_name: params.lastName,
-      username: params.username,
-      password: params.password,
-      email: params.email,
-      profile: {
-        text: params.website,
-      },
-    })
-    .then(res => {
-      if (res.data.success !== true && res.data.message) {
-        throw new Error(res)
-      }
-      const user = dispatch(handleSuccessfulLogin(res.data, params.email))
-      if (!user) {
-        console.error('Got invalid signup response', res.data)
-        throw new Error(res)
-      }
-      return user
-    })
+export const signup = params => dispatch => axios
+  .post('/auth/register/', {
+    first_name: params.firstName,
+    last_name: params.lastName,
+    username: params.username,
+    password: params.password,
+    email: params.email,
+    profile: {
+      text: params.website,
+    },
+  })
+  .then(res => {
+    if (res.data.success !== true && res.data.message) {
+      throw new Error(res)
+    }
+    const user = dispatch(handleSuccessfulLogin(res.data, params.email))
+    if (!user) {
+      console.error('Got invalid signup response', res.data)
+      throw new Error(res)
+    }
+    return user
+  })
 
-export const performLogin = params =>
-  // TODO: set up
-  axios.post('/auth/login', params).then(res => console.log(res))
+export const performLogin = params => axios.post('/auth/login', params).then(res => console.log(res))
 
 export const handleSuccessfulLogin = (userRes, email) => dispatch => {
   if (!userRes.user || !userRes.token) {
@@ -64,13 +61,10 @@ export const handleSuccessfulLogin = (userRes, email) => dispatch => {
  * Logout
  */
 
-export const logout = () => {
-  console.log('logout')
-  return dispatch => {
-    dispatch(setLoggedIn(false))
-    dispatch(clearToken())
-    dispatch(resetStore())
-  }
+export const logout = () => dispatch => {
+  dispatch(setLoggedIn(false))
+  dispatch(clearToken())
+  dispatch(resetStore())
 }
 
 /**
@@ -174,7 +168,6 @@ export default createReducer(
      * @event clearToken - wipe tokens, and all data in store
      */
     [clearToken]: state => {
-      console.log(state)
       if (!state.emailAddress) {
         console.error(
           'attempting to clear token without email address - rejected'
